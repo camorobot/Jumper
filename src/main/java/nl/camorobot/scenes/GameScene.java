@@ -1,7 +1,9 @@
 package nl.camorobot.scenes;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.ScrollableDynamicScene;
 import nl.camorobot.Jumper;
+import nl.camorobot.entities.player.Player;
 
 public class GameScene extends ScrollableDynamicScene {
 
@@ -19,6 +21,7 @@ public class GameScene extends ScrollableDynamicScene {
 
   @Override
   public void setupEntities() {
-
+    Player player = new Player("sprites/player_right.png", new Coordinate2D(300,300));
+    addEntity(player);
   }
 }

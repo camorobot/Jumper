@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67cc244b-1b4d-4e78-b10e-e0074e31bf02" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/entities/player/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/Jumper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/Jumper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/TitleScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/TitleScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Feature-GameScene",
+    "git-widget-placeholder": "Feature-Player",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -81,7 +81,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711298105348</updated>
-      <workItem from="1711298106464" duration="3428000" />
+      <workItem from="1711298106464" duration="5270000" />
     </task>
     <servers />
   </component>
