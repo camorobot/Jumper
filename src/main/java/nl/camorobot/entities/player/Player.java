@@ -10,6 +10,7 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
+import nl.camorobot.Jumper;
 import nl.camorobot.platforms.BluePlatform;
 import nl.camorobot.platforms.BrownPlatform;
 import nl.camorobot.platforms.GreenPlatform;
@@ -21,22 +22,22 @@ import java.util.Set;
 
 public class Player extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided {
 
-  private int score = 0;
+  private Jumper jumper;
   private ScoreText scoreText;
 
-  public Player(String resource, Coordinate2D initialLocation, Size size, Integer rows, Integer columns, ScoreText scoreText) {
+  public Player(String resource, Coordinate2D initialLocation, Size size, Integer rows, Integer columns, Jumper jumper, ScoreText scoreText) {
     super(resource, initialLocation, size, rows, columns);
     this.scoreText = scoreText;
+    this.jumper = jumper;
     setFrictionConstant(0.04);
   }
 
   @Override
   public void onCollision(List<Collider> list) {
 
-    if(((list.get(0) instanceof GreenPlatform) || (list.get(0) instanceof BrownPlatform) || (list.get(0) instanceof BluePlatform)) && ((Platform) list.get(0)).getIsScoreEnable() == true){
-      score++;
-      scoreText.setScoreText(score);
-    }
+    updatePlayerScore();
+    scoreText.setScoreText(jumper.getPlayerScore());
+    System.out.println("Player score: " + jumper.getPlayerScore());
 
     if (list.get(0) instanceof GreenPlatform) {
       ((GreenPlatform) list.get(0)).activeerEffect();
@@ -45,7 +46,6 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
       ((BrownPlatform) list.get(0)).activeerEffect();
       ((BrownPlatform) list.get(0)).setIscScoreEnabled(false);
     }
-
   }
 
   @Override
@@ -54,13 +54,14 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
 
     switch (border) {
       case TOP:
+        jumper.setActiveScene(2);
         setAnchorLocationY(1);
         break;
       case BOTTOM:
         setAnchorLocationY(getSceneHeight() - getHeight() - 1);
         break;
       case LEFT:
-        setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+        setAnchorLocationX(getSceneWidth());
         break;
       case RIGHT:
         setAnchorLocationX(1);
@@ -84,5 +85,11 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
     } else if (pressedKeys.contains(KeyCode.DOWN)) {
       setMotion(3, 0d);
     }
+  }
+
+  public void updatePlayerScore() {
+    int score = jumper.getPlayerScore() + 1;
+    jumper.setPlayerScore(score);
+    scoreText.setScoreText(jumper.getPlayerScore());
   }
 }
