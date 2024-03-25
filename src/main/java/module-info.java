@@ -4,7 +4,7 @@ module jumper {
   exports nl.camorobot;
 
   opens backgrounds;
-//  opens sprites;
+  opens sprites;
 //  exports com.github.hanyaeger.tutorial.Scenes;
 //  exports com.github.hanyaeger.tutorial.Entitys;
 //  exports com.github.hanyaeger.tutorial.Text;
