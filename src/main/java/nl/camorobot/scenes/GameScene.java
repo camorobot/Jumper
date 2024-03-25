@@ -14,10 +14,12 @@ public class GameScene extends ScrollableDynamicScene implements EntitySpawnerCo
 
   private Jumper jumper;
   private Player player;
+  private int playerScore;
   private PlatformSpawner platformSpawner;
 
-  public GameScene(Jumper jumper) {
+  public GameScene(Jumper jumper, int playerScore) {
     this.jumper = jumper;
+    this.playerScore = playerScore;
   }
 
   @Override
@@ -30,7 +32,7 @@ public class GameScene extends ScrollableDynamicScene implements EntitySpawnerCo
     ScoreText scoreText = new ScoreText(new Coordinate2D(10, 30));
     addEntity(scoreText);
 
-    player = new Player("sprites/player_sprites.png", new Coordinate2D(300,300), new Size(25,25), 1,2, scoreText);
+    player = new Player("sprites/player_sprites.png", new Coordinate2D(300,300), new Size(25,25), 1,2, jumper, scoreText);
 
     Platform greenPlatform = new GreenPlatform(new Coordinate2D(50, 500), player);
     addEntity(greenPlatform);
@@ -46,8 +48,7 @@ public class GameScene extends ScrollableDynamicScene implements EntitySpawnerCo
 
   @Override
   public void setupEntitySpawners() {
-    System.out.println(this);
-    platformSpawner = new PlatformSpawner(player ,750, this);
+    platformSpawner = new PlatformSpawner(player ,750);
     addEntitySpawner(platformSpawner);
   }
 }

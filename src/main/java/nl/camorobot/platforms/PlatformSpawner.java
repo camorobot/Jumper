@@ -9,12 +9,10 @@ import java.util.Random;
 
 public class PlatformSpawner extends EntitySpawner {
 
-  private GameScene gameScene;
   private Player player;
 
-  public PlatformSpawner(Player player, final long intervalInMs, GameScene gameScene) {
+  public PlatformSpawner(Player player, final long intervalInMs) {
     super(intervalInMs);
-    this.gameScene = gameScene;
     this.player = player;
   }
 
