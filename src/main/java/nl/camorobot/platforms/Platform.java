@@ -12,29 +12,32 @@ public abstract class Platform extends DynamicSpriteEntity implements Collider {
 
   protected Platform(String resource, Coordinate2D initialLocation) {
     super(resource, initialLocation);
-    setAnchorPoint(AnchorPoint.CENTER_CENTER);
-    setMotion(1,0d);
+    setupPlatform();
   }
 
   public Platform(String resource, Coordinate2D initialLocation, Size size) {
     super(resource, initialLocation, size);
-    setAnchorPoint(AnchorPoint.CENTER_CENTER);
-    setMotion(1,0d);
+    setupPlatform();
   }
 
-  public Platform(String resource, Coordinate2D initialLocation, Size size, int rows, int colums) {
-    super(resource, initialLocation, size, rows, colums);
-    setAnchorPoint(AnchorPoint.CENTER_CENTER);
-    setMotion(1,0d);
+  public Platform(String resource, Coordinate2D initialLocation, Size size, int rows, int columns) {
+    super(resource, initialLocation, size, rows, columns);
+    setupPlatform();
   }
 
   public abstract void activeerEffect();
+
+  private void setupPlatform(){
+    isScoreEnabled = true;
+    setAnchorPoint(AnchorPoint.CENTER_CENTER);
+    setMotion(1,0d);
+  }
 
   public boolean getIsScoreEnable(){
     return isScoreEnabled;
   }
 
-  public void setIscScoreEnabled(boolean newScore){
+  public void setIsScoreEnabled(boolean newScore){
     this.isScoreEnabled = newScore;
   }
 
