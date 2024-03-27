@@ -10,11 +10,6 @@ public abstract class Platform extends DynamicSpriteEntity implements Collider {
 
   private boolean isScoreEnabled;
 
-  protected Platform(String resource, Coordinate2D initialLocation) {
-    super(resource, initialLocation);
-    setupPlatform();
-  }
-
   public Platform(String resource, Coordinate2D initialLocation, Size size) {
     super(resource, initialLocation, size);
     setupPlatform();

@@ -2,15 +2,16 @@ package nl.camorobot.entities.player;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import com.github.hanyaeger.api.entities.Collided;
-import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Newtonian;
-import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
+import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import nl.camorobot.Jumper;
+import nl.camorobot.entities.finish.Finish;
+import nl.camorobot.platforms.BombPlatform;
+import nl.camorobot.entities.rocket.Rocket;
+import nl.camorobot.platforms.BluePlatform;
 import nl.camorobot.platforms.BrownPlatform;
 import nl.camorobot.platforms.GreenPlatform;
 import nl.camorobot.platforms.Platform;
@@ -25,15 +26,26 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
   private ScoreText scoreText;
   private boolean gameStarted = false;
 
-  public Player(String resource, Coordinate2D initialLocation, Size size, Integer rows, Integer columns, Jumper jumper, ScoreText scoreText) {
-    super(resource, initialLocation, size, rows, columns);
+  public Player(String resource, Coordinate2D location, Size size, Integer rows, Integer columns, Jumper jumper, ScoreText scoreText) {
+    super(resource, location, size, rows, columns);
     this.scoreText = scoreText;
     this.jumper = jumper;
     setFrictionConstant(0.04);
   }
 
+
+
   @Override
   public void onCollision(List<Collider> list) {
+
+    if(list.get(0) instanceof Rocket){
+      ((Rocket) list.get(0)).boost();
+    }
+
+    if (list.get(0) instanceof Finish) {
+      jumper.setDeadMessage("Finished");
+      jumper.setActiveScene(2);
+    }
 
     if(list.get(0) instanceof Platform){
       gameStarted = true;
@@ -41,7 +53,6 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
         updatePlayerScore();
         scoreText.setScoreText(jumper.getPlayerScore());
         ((Platform) list.get(0)).setIsScoreEnabled(false);
-        System.out.println("Player score: " + jumper.getPlayerScore());
       }
     }
 
@@ -50,6 +61,10 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
       ((GreenPlatform) list.get(0)).activeerEffect();
     } else if (list.get(0) instanceof BrownPlatform) {
       ((BrownPlatform) list.get(0)).activeerEffect();
+    } else if (list.get(0) instanceof BluePlatform) {
+      ((BluePlatform) list.get(0)).activeerEffect();
+    } else if(list.get(0) instanceof BombPlatform){
+      ((BombPlatform) list.get(0)).activeerEffect();
     }
   }
 
@@ -59,22 +74,19 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
 
     switch (border) {
       case TOP:
-        jumper.setActiveScene(2);
         setAnchorLocationY(1);
         break;
       case BOTTOM:
         if (gameStarted) {
+          jumper.setDeadMessage("Fell");
           jumper.setActiveScene(2);
         }
         setAnchorLocationY(getSceneHeight() - getHeight() - 1);
         break;
       case LEFT:
-        System.out.println("Left border");
-        System.out.println(getSceneWidth() - 1);
         setAnchorLocationX(getSceneWidth() - 45);
         break;
       case RIGHT:
-        System.out.println("Right border");
         setAnchorLocationX(1);
       default:
         break;
@@ -85,16 +97,16 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
   public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
     if (pressedKeys.contains(KeyCode.LEFT)) {
       setCurrentFrameIndex(0);
-      setMotion(3, 270d);
+      maximizeMotionInDirection(Direction.LEFT, 2);
     } else if (pressedKeys.contains(KeyCode.RIGHT)) {
       setCurrentFrameIndex(1);
-      setMotion(3, 90d);
-      // Hiermee word je heen en weer geschoten
-//      setDirection(90d);
+      maximizeMotionInDirection(Direction.RIGHT, 2);
     } else if (pressedKeys.contains(KeyCode.UP)) {
       setMotion(3, 180d);
     } else if (pressedKeys.contains(KeyCode.DOWN)) {
       setMotion(3, 0d);
+    } else if (pressedKeys.contains(KeyCode.Q)) {
+      jumper.setActiveScene(2);
     }
   }
 

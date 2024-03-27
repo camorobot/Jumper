@@ -19,8 +19,6 @@ public class BrownPlatform extends Platform{
 
   @Override
   public void activeerEffect() {
-    System.out.println("Brown platform activeert effect");
-
     if(!isBroken){
       isBroken = true;
       player.setMotion(10, 180d);
