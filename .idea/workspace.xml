@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67cc244b-1b4d-4e78-b10e-e0074e31bf02" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/buttons/StartButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/TitleScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/buttons/QuitGameButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/buttons/TryAgainButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/entities/finish/Finish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/entities/rocket/Rocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/BombPlatform.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/bombPlatform.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/finish.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/Jumper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/Jumper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/entities/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/entities/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/BluePlatform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/BluePlatform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/BrownPlatform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/BrownPlatform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/GreenPlatform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/GreenPlatform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/Platform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/Platform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/PlatformSpawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/platforms/PlatformSpawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameOverScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameOverScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/camorobot/scenes/GameScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +39,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2e8tbXs2lxA2aIk0IqAuimmShAX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -45,7 +56,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Feature-TitleScene",
+    "git-widget-placeholder": "Feature-Rocket",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -59,6 +70,7 @@
     <configuration name="Jumper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nl.camorobot.Jumper" />
       <module name="Jumper" />
+      <option name="PROGRAM_PARAMETERS" value="--showBB" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="nl.camorobot.*" />
@@ -75,6 +87,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-be841094" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -83,7 +102,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711298105348</updated>
-      <workItem from="1711298106464" duration="3130000" />
+      <workItem from="1711298106464" duration="3428000" />
+      <workItem from="1711391811830" duration="5619000" />
+      <workItem from="1711490081981" duration="13828000" />
     </task>
     <servers />
   </component>

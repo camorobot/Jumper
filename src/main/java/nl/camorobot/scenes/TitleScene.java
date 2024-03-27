@@ -14,7 +14,6 @@ public class TitleScene extends StaticScene {
 
   private Jumper jumper;
 
-
   public TitleScene(Jumper Jumper) {
     this.jumper = Jumper;
   }
