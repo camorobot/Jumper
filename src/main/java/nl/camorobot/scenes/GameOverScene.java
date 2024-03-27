@@ -8,7 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import nl.camorobot.Jumper;
+import nl.camorobot.buttons.QuitGameButton;
 import nl.camorobot.buttons.StartButton;
+import nl.camorobot.buttons.TryAgainButton;
 
 public class GameOverScene extends StaticScene {
 
@@ -29,19 +31,50 @@ public class GameOverScene extends StaticScene {
   public void setupEntities() {
     playerScore = jumper.getPlayerScore();
 
-    TextEntity gameOverText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/5), "Game Over!");
-    gameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-    gameOverText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
-    gameOverText.setFill(Color.PURPLE);
-    addEntity(gameOverText);
+    switch (jumper.getDeadMessage()){
+      case "Bomb":
+        TextEntity bombText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/3), "Game over: You hit a bomb!");
+        bombText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        bombText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        bombText.setFill(Color.PURPLE);
+        addEntity(bombText);
 
-    TextEntity scoreText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/4), "Your score: " + playerScore);
-    scoreText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-    scoreText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
-    scoreText.setFill(Color.PURPLE);
-    addEntity(scoreText);
+        TryAgainButton tryAgainButton = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), jumper);
+        addEntity(tryAgainButton);
+        break;
+      case "Fell":
+        TextEntity fellText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/3), "Game over: You fell off the platform!");
+        fellText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        fellText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        fellText.setFill(Color.PURPLE);
+        addEntity(fellText);
 
-    StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),jumper);
-    addEntity(startButton);
+        TryAgainButton tryAgainButton2 = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), jumper);
+        addEntity(tryAgainButton2);
+        break;
+      default:
+        TextEntity gameOverText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/5), "You win!");
+        gameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        gameOverText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        gameOverText.setFill(Color.PURPLE);
+        addEntity(gameOverText);
+
+        TextEntity scoreText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/4), "Your score: " + playerScore);
+        scoreText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        scoreText.setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        scoreText.setFill(Color.PURPLE);
+        addEntity(scoreText);
+
+        StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),jumper);
+        addEntity(startButton);
+    }
+
+    QuitGameButton quitGameButton = new QuitGameButton(new Coordinate2D(getWidth()/2, getHeight()/1.5), jumper);
+    addEntity(quitGameButton);
+
+    jumper.setDeadMessage("Finished");
+    jumper.setPlayerScore(0);
+
+
   }
 }

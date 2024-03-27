@@ -15,7 +15,6 @@ public class GreenPlatform extends Platform{
 
   @Override
   public void activeerEffect() {
-    System.out.println("Direction: " + player.getDirection());
     player.setMotion(8, 180d);
   }
 }

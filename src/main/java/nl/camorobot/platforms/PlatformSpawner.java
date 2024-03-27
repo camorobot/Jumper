@@ -1,45 +1,54 @@
 package nl.camorobot.platforms;
 
 import com.github.hanyaeger.api.Coordinate2D;
+import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.EntitySpawner;
+import nl.camorobot.Jumper;
 import nl.camorobot.entities.player.Player;
-import nl.camorobot.scenes.GameScene;
 
 import java.util.Random;
 
 public class PlatformSpawner extends EntitySpawner {
 
   private Player player;
+  private Jumper jumper;
+  private int platformsSinceLastBomb = 0;
 
-  public PlatformSpawner(Player player, final long intervalInMs) {
+  public PlatformSpawner(Player player, final long intervalInMs, Jumper jumper) {
     super(intervalInMs);
     this.player = player;
+    this.jumper = jumper;
   }
 
   @Override
   protected void spawnEntities() {
     Random rand = new Random();
-
-    int sceneWidth = 600; // De breedte van je scene
-    int sceneHeight = 800; // De hoogte van je scene
-
+    int sceneWidth = 600;
     int x = rand.nextInt(sceneWidth - 100);
     int y = 0;
-
-    int randomNum = rand.nextInt(5); // Genereert een getal tussen 0 en 4
+    int randomNum = platformsSinceLastBomb >= 5 ? 2 : rand.nextInt(8);
 
     switch (randomNum) {
       case 0:
-        // 1 op 5 kans
         spawn(new BrownPlatform(new Coordinate2D(x, y), player));
         break;
+      case 1:
+        spawn(new BluePlatform(new Coordinate2D(x, y), new Size(50, 50), player));
+        break;
+      case 2:
+        if (platformsSinceLastBomb >= 5) {
+          spawn(new BombPlatform(new Coordinate2D(x, y), new Size(50, 50), jumper));
+          platformsSinceLastBomb = 0;
+        } else {
+          spawn(new GreenPlatform(new Coordinate2D(x, y), player));
+          platformsSinceLastBomb++;
+        }
+        break;
       default:
-        // 4 op 5 kans
         spawn(new GreenPlatform(new Coordinate2D(x, y), player));
+        platformsSinceLastBomb++;
         break;
     }
-
   }
-
 
 }
