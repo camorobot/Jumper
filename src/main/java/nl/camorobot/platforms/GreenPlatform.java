@@ -6,15 +6,18 @@ import nl.camorobot.entities.player.Player;
 
 public class GreenPlatform extends Platform{
 
-  Player player;
+  private final Player PLAYER;
+
 
   public GreenPlatform(Coordinate2D initialLocation, Player player) {
     super("sprites/greenplatform.png", initialLocation, new Size(55, 50));
-    this.player = player;
+    this.PLAYER = player;
   }
 
+  // This method will be called when the player collides with the green platform
+  // The player will be boosted
   @Override
   public void activeerEffect() {
-    player.setMotion(8, 180d);
+    PLAYER.setMotion(8, 180d);
   }
 }

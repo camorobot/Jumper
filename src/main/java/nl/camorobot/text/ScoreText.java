@@ -13,6 +13,7 @@ public class ScoreText extends TextEntity {
     setFill(Color.DARKBLUE);
   }
 
+  // This method will set the score text
   public void setScoreText(int score){
     setText("Score: " + score);
   }

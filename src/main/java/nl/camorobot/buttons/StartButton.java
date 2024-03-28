@@ -15,11 +15,11 @@ import nl.camorobot.Jumper;
 
 public class StartButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
 
-  private Jumper jumper;
+  private final Jumper JUMPER;
 
   public StartButton(Coordinate2D initialLocation, Jumper jumper) {
     super(initialLocation, "Play Game");
-    this.jumper = jumper;
+    this.JUMPER = jumper;
     setAnchorPoint(AnchorPoint.CENTER_CENTER);
     setFill(Color.PURPLE);
     setFont(Font.font("Roboto", FontWeight.BOLD, 30));
@@ -27,7 +27,7 @@ public class StartButton extends TextEntity implements MouseButtonPressedListene
 
   @Override
   public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-    jumper.setActiveScene(1);
+    JUMPER.setActiveScene(1);
   }
 
   @Override

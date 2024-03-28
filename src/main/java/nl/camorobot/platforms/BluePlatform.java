@@ -8,17 +8,19 @@ import nl.camorobot.entities.player.Player;
 
 public class BluePlatform extends Platform implements SceneBorderTouchingWatcher {
 
-  Player player;
+  private final Player PLAYER;
 
   public BluePlatform(Coordinate2D initialLocation, Size size, Player player){
     super("sprites/blueplatform.png", initialLocation, size);
-    this.player = player;
+    this.PLAYER = player;
     setMotion(2, 60d);
   }
 
+  // This method will be called when the player collides with the blue platform
+  // The player will be boosted.
   @Override
   public void activeerEffect() {
-    player.setMotion(8, 180d);
+    PLAYER.setMotion(8, 180d);
   }
 
   @Override
