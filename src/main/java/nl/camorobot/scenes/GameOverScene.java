@@ -14,11 +14,11 @@ import nl.camorobot.buttons.TryAgainButton;
 
 public class GameOverScene extends StaticScene {
 
-  private Jumper jumper;
+  private final Jumper JUMPER;
   private int playerScore;
 
   public GameOverScene(Jumper Jumper, int playerScore) {
-    this.jumper = Jumper;
+    this.JUMPER = Jumper;
     this.playerScore = playerScore;
   }
 
@@ -29,9 +29,10 @@ public class GameOverScene extends StaticScene {
 
   @Override
   public void setupEntities() {
-    playerScore = jumper.getPlayerScore();
+    playerScore = JUMPER.getPlayerScore();
 
-    switch (jumper.getDeadMessage()){
+    // Show the appropriate message based on the dead message
+    switch (JUMPER.getDeadMessage()){
       case "Bomb":
         TextEntity bombText = new TextEntity(new Coordinate2D(getWidth()/2, getHeight()/3), "Game over: You hit a bomb!");
         bombText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
@@ -39,7 +40,7 @@ public class GameOverScene extends StaticScene {
         bombText.setFill(Color.PURPLE);
         addEntity(bombText);
 
-        TryAgainButton tryAgainButton = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), jumper);
+        TryAgainButton tryAgainButton = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), JUMPER);
         addEntity(tryAgainButton);
         break;
       case "Fell":
@@ -49,7 +50,7 @@ public class GameOverScene extends StaticScene {
         fellText.setFill(Color.PURPLE);
         addEntity(fellText);
 
-        TryAgainButton tryAgainButton2 = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), jumper);
+        TryAgainButton tryAgainButton2 = new TryAgainButton(new Coordinate2D(getWidth()/2, getHeight()/2), JUMPER);
         addEntity(tryAgainButton2);
         break;
       default:
@@ -65,15 +66,15 @@ public class GameOverScene extends StaticScene {
         scoreText.setFill(Color.PURPLE);
         addEntity(scoreText);
 
-        StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),jumper);
+        StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),JUMPER);
         addEntity(startButton);
     }
 
-    QuitGameButton quitGameButton = new QuitGameButton(new Coordinate2D(getWidth()/2, getHeight()/1.5), jumper);
+    QuitGameButton quitGameButton = new QuitGameButton(new Coordinate2D(getWidth()/2, getHeight()/1.5), JUMPER);
     addEntity(quitGameButton);
 
-    jumper.setDeadMessage("Finished");
-    jumper.setPlayerScore(0);
+    JUMPER.setDeadMessage("Finished");
+    JUMPER.setPlayerScore(0);
 
 
   }

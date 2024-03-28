@@ -15,11 +15,11 @@ import nl.camorobot.Jumper;
 
 public class QuitGameButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
 
-  private Jumper jumper;
+  private final Jumper JUMPER;
 
   public QuitGameButton(Coordinate2D initialLocation, Jumper jumper) {
     super(initialLocation, "Quit Game");
-    this.jumper = jumper;
+    this.JUMPER = jumper;
     setAnchorPoint(AnchorPoint.CENTER_CENTER);
     setFill(Color.PURPLE);
     setFont(Font.font("Roboto", FontWeight.BOLD, 30));
@@ -27,7 +27,7 @@ public class QuitGameButton extends TextEntity implements MouseButtonPressedList
 
   @Override
   public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-    jumper.quit();
+    JUMPER.quit();
   }
 
   @Override

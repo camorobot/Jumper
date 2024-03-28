@@ -22,6 +22,7 @@ public abstract class Platform extends DynamicSpriteEntity implements Collider {
 
   public abstract void activeerEffect();
 
+  // This method will set up the platform
   private void setupPlatform(){
     isScoreEnabled = true;
     setAnchorPoint(AnchorPoint.CENTER_CENTER);

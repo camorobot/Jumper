@@ -10,18 +10,18 @@ import java.util.Random;
 
 public class PlatformSpawner extends EntitySpawner {
 
-  private Player player;
-  private Jumper jumper;
+  private final Player PLAYER;
+  private final Jumper JUMPER;
   private int platformsSinceLastBomb = 0;
 
   public PlatformSpawner(Player player, final long intervalInMs, Jumper jumper) {
     super(intervalInMs);
-    this.player = player;
-    this.jumper = jumper;
+    this.PLAYER = player;
+    this.JUMPER = jumper;
   }
 
   @Override
-  protected void spawnEntities() {
+  public void spawnEntities() {
     Random rand = new Random();
     int sceneWidth = 600;
     int x = rand.nextInt(sceneWidth - 100);
@@ -30,22 +30,23 @@ public class PlatformSpawner extends EntitySpawner {
 
     switch (randomNum) {
       case 0:
-        spawn(new BrownPlatform(new Coordinate2D(x, y), player));
+        spawn(new BrownPlatform(new Coordinate2D(x, y), PLAYER));
         break;
       case 1:
-        spawn(new BluePlatform(new Coordinate2D(x, y), new Size(50, 50), player));
+        spawn(new BluePlatform(new Coordinate2D(x, y), new Size(50, 50), PLAYER));
         break;
       case 2:
+        // If the last 5 platforms were NOT bombs, spawn a bomb platform
         if (platformsSinceLastBomb >= 5) {
-          spawn(new BombPlatform(new Coordinate2D(x, y), new Size(50, 50), jumper));
+          spawn(new BombPlatform(new Coordinate2D(x, y), new Size(50, 50), JUMPER));
           platformsSinceLastBomb = 0;
         } else {
-          spawn(new GreenPlatform(new Coordinate2D(x, y), player));
+          spawn(new GreenPlatform(new Coordinate2D(x, y), PLAYER));
           platformsSinceLastBomb++;
         }
         break;
       default:
-        spawn(new GreenPlatform(new Coordinate2D(x, y), player));
+        spawn(new GreenPlatform(new Coordinate2D(x, y), PLAYER));
         platformsSinceLastBomb++;
         break;
     }

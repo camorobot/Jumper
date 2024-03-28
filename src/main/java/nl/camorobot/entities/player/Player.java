@@ -22,41 +22,43 @@ import java.util.Set;
 
 public class Player extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Newtonian, Collided {
 
-  private Jumper jumper;
-  private ScoreText scoreText;
+  private final Jumper JUMPER;
+  private final ScoreText SCORE_TEXT;
   private boolean gameStarted = false;
+  private boolean hasJumped = false;
 
   public Player(String resource, Coordinate2D location, Size size, Integer rows, Integer columns, Jumper jumper, ScoreText scoreText) {
     super(resource, location, size, rows, columns);
-    this.scoreText = scoreText;
-    this.jumper = jumper;
+    this.SCORE_TEXT = scoreText;
+    this.JUMPER = jumper;
     setFrictionConstant(0.04);
   }
-
-
 
   @Override
   public void onCollision(List<Collider> list) {
 
+    // Check if the player has collided with a rocket
     if(list.get(0) instanceof Rocket){
       ((Rocket) list.get(0)).boost();
     }
 
+    // Check if the player has collided with the finish line
     if (list.get(0) instanceof Finish) {
-      jumper.setDeadMessage("Finished");
-      jumper.setActiveScene(2);
+      JUMPER.setDeadMessage("Finished");
+      JUMPER.setActiveScene(2);
     }
 
+    // Check if the player has collided with a platform
     if(list.get(0) instanceof Platform){
       gameStarted = true;
       if (((Platform) list.get(0)).getIsScoreEnable()) {
         updatePlayerScore();
-        scoreText.setScoreText(jumper.getPlayerScore());
+        SCORE_TEXT.setScoreText(JUMPER.getPlayerScore());
         ((Platform) list.get(0)).setIsScoreEnabled(false);
       }
     }
 
-
+    // Check if the player has collided with a platform that has an effect
     if (list.get(0) instanceof GreenPlatform) {
       ((GreenPlatform) list.get(0)).activeerEffect();
     } else if (list.get(0) instanceof BrownPlatform) {
@@ -77,9 +79,10 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
         setAnchorLocationY(1);
         break;
       case BOTTOM:
+        // Check if the game has started, if so, set the player to dead
         if (gameStarted) {
-          jumper.setDeadMessage("Fell");
-          jumper.setActiveScene(2);
+          JUMPER.setDeadMessage("Fell");
+          JUMPER.setActiveScene(2);
         }
         setAnchorLocationY(getSceneHeight() - getHeight() - 1);
         break;
@@ -102,17 +105,22 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
       setCurrentFrameIndex(1);
       maximizeMotionInDirection(Direction.RIGHT, 2);
     } else if (pressedKeys.contains(KeyCode.UP)) {
-      setMotion(3, 180d);
+      // Check if the player has jumped, if not, set the player to jump
+      if (!hasJumped) {
+        setMotion(10, 180d);
+        hasJumped = true;
+      }
     } else if (pressedKeys.contains(KeyCode.DOWN)) {
       setMotion(3, 0d);
     } else if (pressedKeys.contains(KeyCode.Q)) {
-      jumper.setActiveScene(2);
+      JUMPER.setActiveScene(2);
     }
   }
 
-  public void updatePlayerScore() {
-    int score = jumper.getPlayerScore() + 1;
-    jumper.setPlayerScore(score);
-    scoreText.setScoreText(jumper.getPlayerScore());
+  // This method is used to update the player score
+  private void updatePlayerScore() {
+    int score = JUMPER.getPlayerScore() + 1;
+    JUMPER.setPlayerScore(score);
+    SCORE_TEXT.setScoreText(JUMPER.getPlayerScore());
   }
 }

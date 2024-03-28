@@ -8,14 +8,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import nl.camorobot.Jumper;
+import nl.camorobot.buttons.QuitGameButton;
 import nl.camorobot.buttons.StartButton;
 
 public class TitleScene extends StaticScene {
 
-  private Jumper jumper;
+  private final Jumper JUMPER;
 
   public TitleScene(Jumper Jumper) {
-    this.jumper = Jumper;
+    this.JUMPER = Jumper;
   }
 
   @Override
@@ -31,7 +32,10 @@ public class TitleScene extends StaticScene {
     welkomText.setFill(Color.PURPLE);
     addEntity(welkomText);
 
-    StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),jumper);
+    StartButton startButton = new StartButton(new Coordinate2D(getWidth()/2, getHeight()/2),JUMPER);
     addEntity(startButton);
+
+    QuitGameButton quitGameButton = new QuitGameButton(new Coordinate2D(getWidth()/2, getHeight()/1.5), JUMPER);
+    addEntity(quitGameButton);
   }
 }

@@ -8,16 +8,18 @@ import nl.camorobot.entities.player.Player;
 
 public class Rocket extends DynamicSpriteEntity implements Collider {
 
-  private Player player;
+  private final Player PLAYER;
 
   public Rocket(String resource, Coordinate2D initialLocation, Size size, Player player) {
     super(resource, initialLocation, size);
-    this.player = player;
+    this.PLAYER = player;
     setMotion(1,0d);
   }
 
+  // This method will be called when the player collides with the rocket
+  // The player will be boosted and the rocket will be removed
   public void boost(){
-    player.setMotion(20, 180d);
+    PLAYER.setMotion(20, 180d);
     remove();
   }
 
